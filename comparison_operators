@@ -1,0 +1,49 @@
+〜比較演算子リスト〜
+
+-- Nullの判定
+①NULLであること
+SELECT *
+  FROM 家計簿
+ WHERE 出金額 IS NULL 
+
+②NULLでないこと
+SELECT *
+  FROM 家計簿
+ WHERE 出金額 IS NOT NULL
+
+
+-- LIKE演算子(パターンマッチング)
+SELECT *
+  FROM 家計簿
+ WHERE メモ LIKE '%1月%'
+
+% ... 任意の0文字以上の文字列
+_ ... 任意の1文字
+
+
+-- BETWEEN演算子(範囲判定)
+SELECT *
+  FROM 家計簿
+ WHERE 出金額 BETWEEN 100 AND 3000
+
+
+-- IN / NOT IN 演算子(複数値との比較。いずれかと合致。)
+SELECT * 
+  FROM 家計簿
+ WHERE 費目 IN ('食費', '交際費')
+
+SELECT *
+  FROM 家計簿
+ WHERE 費目 NOT IN ('食費', '交際費')
+
+
+-- ANY / ALL 演算子(複数値との比較。大小の比較。)
+・ANY (値リストのそれぞれと比較して、いずれかが真なら真)
+SELECT *
+  FROM 家計簿
+ WHERE 出金額(2500) < ANY (1000, 2000, 3000)  => true
+
+・ALL (値リストのそれぞれと比較して、全て真なら真)
+SELECT *
+  FROM 家計簿
+ WHERE 出金額(1000) < ALL (1000, 2000, 3000)  => false
