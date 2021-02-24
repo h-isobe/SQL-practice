@@ -1,0 +1,64 @@
+〜SELECT結果の加工〜
+
+-- DISTINCT(ディスティンクト) (重複行を除外する)
+SELECT DISTINCT 費目
+  FROM 家計簿
+
+
+-- ORDER BY(結果を並べ替える)
+SELECT *
+  FROM 家計簿
+ ORDER BY 出金額
+
+SELECT *
+  FROM 家計簿
+ ORDER BY 日付 DESC
+
+SELECT *
+  FROM 家計簿
+ ORDER BY 入金額 DESC, 出金額 DESC
+
+SELECT *
+  FROM 家計簿
+ ORDER BY 4 DESC, 5 DESC
+
+
+-- OFFSET(オフセット) - FETCH(フェッチ)(先頭から数行だけ取得する)
+SELECT 費目, 出金額
+  FROM 家計簿
+ ORDER BY 出金額 DESC
+OFFSET 0 ROWS            //先頭から除外したい行数を指定
+ FETCH NEXT 3 ROWS ONLY  //取得したい行数を指定
+
+SELECT 費目, 出金額
+  FROM 家計簿
+ ORDER BY 出金額 DESC
+OFFSET 2 ROWS
+ FETCH NEXT 1 ROWS ONLY
+
+
+-- UNION(ユニオン) (和集合を求める)
+SELECT 費目, 入金額, 出金額
+  FROM 家計簿
+ UNION
+SELECT 費目, 入金額, 出金額
+  FROM 家計簿アーカイブ
+ ORDER BY 2, 3, 1
+
+
+-- EXCEPT(エクセプト) / MINUS(マイナス) (差集合を求める)
+SELECT 費目
+  FROM 家計簿(2月分)
+EXCEPT
+SELECT 費目
+  FROM 家計簿アーカイブ(2月以前)
+=> 2月に入って登場した費目が出力される
+
+
+-- INTERSECT(インターセクト) (積集合を求める)
+SELECT 費目
+  FROM 家計簿
+INTERSECT
+SELECT 費目
+  FROM 家計簿アーカイブ
+=> 重複(共通)した行が出力される
