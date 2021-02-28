@@ -1,0 +1,64 @@
+--
+1.家計簿テーブルを作成
+CREATE TABLE 家計簿 (
+  日付        DATE,
+  費目ID      INTEGER,
+  メモ        VARCHAR(100),
+  入金額      INTEGER,
+  出金額      INTEGER
+)
+
+
+2.家計簿テーブルを作成（デフォルト値を活用）
+CREATE TABLE 家計簿 (
+  日付        DATE,
+  費目ID      INTEGER,
+  メモ        VARCHAR(100) DEFAULT '不明',
+  入金額      INTEGER      DEFAULT 0,
+  出金額      INTEGER      DEFAULT 0
+)
+
+
+3.列の追加と削除
+--追加するとき
+ALTER TABLE 家計簿 ADD  関連日 DATE ;
+--削除するとき
+ALTER TABLE 家計簿 DROP  関連日 ;
+
+
+4.基本的な3つの制約を活用（NOT NULL, CHECK, UNIQUE）
+CREATE TABLE 家計簿 (
+  日付     DATE         NOT NULL,
+  費目ID   INTEGER,
+  メモ     VARCHAR(100) DEFAULT '不明' NOT NULL,
+  入金額   INTEGER      DEFAULT 0 CHECK(入金額 >= 0),
+  出金額   INTEGER      DEFAULT 0 CHECK(出金額 >= 0)
+);
+CREATE TABLE 費目 (
+  ID      INTEGER,
+  名前     VARCHAR(40)  UNIQUE
+);
+
+
+5.デフォルト値が設定されていれば、エラーにならない
+-- メモを明示的に指定してINSERT → '家賃' が入る
+INSERT INTO 家計簿 (日付, 費目ID, メモ, 入金額, 出金額)
+     VALUES ('2018-04-04', 2, '家賃', 0, 60000);
+-- メモを省略してINSERT → '不明' が入る
+INSERT INTO 家計簿 (日付, 費目ID, 入金額, 出金額)
+     VALUES ('2018-04-05', 3, 0, 1350);
+
+
+6.主キー制約の指定(1)
+CREATE TABLE 費目 (
+  ID   INTEGER     PRIMARY KEY,
+  名前  VARCHAR(40) UNIQUE
+)
+
+
+7.主キー制約の指定(2)
+CREATE TABLE 費目 (
+  ID   INTEGER NOT NULL,
+  名前  VARCHAR(40) UNIQUE,
+  PRIMARY KEY(ID, 名前)
+)
