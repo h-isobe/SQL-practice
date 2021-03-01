@@ -1,0 +1,10 @@
+-- インデックスの作成
+CREATE INDEX インデックス名 ON テーブル名(列名);
+
+CREATE INDEX 費目IDインデックス ON 家計簿(費目ID);
+CREATE INDEX メモインデックス ON 家計簿(メモ);
+
+
+-- インデックスの削除
+DROP INDEX インデックス名
+※MySQLやMariaDBでは、「ONテーブル名」を付ける。
