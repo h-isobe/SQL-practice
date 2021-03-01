@@ -1,0 +1,30 @@
+-- 採番
+
+リスト11-9 各DBMSにおける連番の指定
+
+/* SQL Server の場合 */
+CREATE TABLE 費目 (
+  ID INTEGER IDENTITY PRIMARY KEY,
+  名前 VARCHAR(40)
+)
+
+
+/* MySQL、MariaDB の場合*/
+CREATE TABLE 費目 (
+  ID INTEGER PRIMARY KEY AUTO_INCREMENT,
+  名前 VARCHAR(40)
+)
+
+
+/* PostgreSQL の場合 */
+CREATE TABLE 費目 (
+  ID SERIAL PRIMARY KEY,
+  名前 VARCHAR(40)
+)
+
+
+/* SQLite(AUTOINCREMENT利用) の場合 */
+CREATE TABLE 費目 (
+  ID INTEGER PRIMARY KEY AUTOINCREMENT,
+  名前 VARCHAR(40)
+)
