@@ -1,0 +1,82 @@
+9.
+SELECT 口座番号
+  FROM 口座
+ WHERE 口座番号 = '0037651'
+
+
+10.
+SELECT 口座番号, 名義, 種別, 残高, 更新日
+  FROM 口座
+ WHERE 残高 > 0
+
+
+11.
+SELECT 口座番号
+  FROM 口座
+ WHERE 口座番号 < 1000000
+
+
+12.
+SELECT 更新日
+  FROM 口座
+ WHERE 更新日 < '2018-01-01'
+
+
+13.
+SELECT 残高
+  FROM 口座
+ WHERE 残高 >= 1000000
+
+
+14.
+SELECT 種別
+  FROM 口座
+ WHERE 種別 <> '1'
+
+
+15.
+SELECT 更新日
+  FROM 口座
+ WHERE 更新日 IS NULL
+
+
+16.
+SELECT 名義
+  FROM 口座
+ WHERE 名義 LIKE '%ハシ%'
+
+
+17.
+SELECT 更新日
+  FROM 口座
+ WHERE 更新日 BETWEEN '2018-01-01' AND '2018-01-31'
+
+
+18.
+SELECT 種別
+  FROM 口座
+ WHERE 種別 IN ('2', '3')
+
+
+19.
+SELECT 名義
+  FROM 口座
+ WHERE 名義 IN (サカタ リョウヘイ', 'マツモト ミワコ', 'ハマダ サトシ')
+
+
+20.
+SELECT 更新日
+  FROM 口座
+ WHERE 更新日 >= '2017-12-30' AND 更新日 < '2018-01-05'
+
+
+21.
+SELECT *
+  FROM 口座
+ WHERE 残金 < 10000 AND 更新日 IS NOT NULL 
+
+
+22.
+SELECT *
+  FROM 口座
+ WHERE 口座番号 LIKE '2______' AND  名義 LIKE 'エ__ %コ'
